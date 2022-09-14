@@ -6,12 +6,19 @@ DROP TABLE responsible;
 DROP TABLE patient;
 DROP TABLE consultation;
 
+INSERT INTO 
+	administrator(email, phone, name, password)
+    VALUES
+    ('adm@adm.com', '01234567890123', 'nome', '123456');
+
+
 CREATE TABLE administrator(
     id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
     email VARCHAR(100) UNIQUE NOT NULL,
     phone VARCHAR(14) NOT NULL,
     name VARCHAR(200) NOT NULL,
-    PASSWORD VARCHAR NOT NULL
+    isAdm BOOLEAN DEFAULT TRUE,
+    password VARCHAR NOT NULL
 );
 
 CREATE TABLE doctor(
@@ -22,7 +29,7 @@ CREATE TABLE doctor(
     email VARCHAR(100) UNIQUE NOT NULL,
     especialidade VARCHAR(200) NOT NULL,
     isAvailable BOOLEAN,
-    PASSWORD VARCHAR NOT NULL
+    password VARCHAR NOT NULL
 );
 
 CREATE TABLE responsible(
@@ -31,7 +38,7 @@ CREATE TABLE responsible(
     rg VARCHAR(10) UNIQUE,
     phone VARCHAR(14),
     email VARCHAR(100) UNIQUE,
-    PASSWORD VARCHAR
+    password VARCHAR
 );
 
 CREATE TABLE patient(
@@ -40,7 +47,7 @@ CREATE TABLE patient(
     rg VARCHAR(10) UNIQUE,
     phone VARCHAR(14),
     email VARCHAR(100) UNIQUE,
-    PASSWORD VARCHAR,
+    password VARCHAR,
     responsible_id uuid,
     FOREIGN KEY (responsible_id) REFERENCES responsible(id)
 );
