@@ -1,4 +1,6 @@
-export const appRoutes = (app) => {
+const appRoutes = (app) => {
     
 }
+
+export default appRoutes
 
