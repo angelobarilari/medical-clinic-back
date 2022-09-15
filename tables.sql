@@ -27,7 +27,7 @@ CREATE TABLE doctor(
     crm VARCHAR UNIQUE NOT NULL,
     phone VARCHAR(14) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
-    especialidade VARCHAR(200) NOT NULL,
+    specialization VARCHAR(200) NOT NULL,
     isAvailable BOOLEAN,
     password VARCHAR NOT NULL
 );
