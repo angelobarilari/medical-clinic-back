@@ -5,10 +5,11 @@ const createDoctorService = async (name, crm, phone, email, specialization, pass
     const verifyValues = [name, crm, phone, email, specialization, password]
 
     verifyValues.forEach(value => {
-        if (value === undefined) {
+        if (!value) {
             throw new AppError(400, {
                 error: "error",
-                message: "Missing data"})
+                message: "Missing data"
+            })
         }
     });
     
@@ -21,6 +22,7 @@ const createDoctorService = async (name, crm, phone, email, specialization, pass
             RETURNING *;`,
             [name, crm, phone, email, specialization, password]
         );
+        
         return res.rows[0]
     } catch(error) {
         const { message } = error
@@ -40,7 +42,6 @@ const createDoctorService = async (name, crm, phone, email, specialization, pass
                 })
             }
         }
-        throw new Error(error)
     }
 }
 
