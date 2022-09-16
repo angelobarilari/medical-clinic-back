@@ -2,7 +2,18 @@ import { database } from "../../data-source"
 import { AppError } from "../../errors/AppError"
 
 const updateAppointmentService = async (appointmentID, newAppointmentData) => {
-    const { doctor_crm, patient_name, patient_rg, date, hour } = newAppointmentData
+    const { doctor_crm, patient_id, patient_rg, patient_name, date, hour } = newAppointmentData
+
+    const verifyValues = [doctor_crm, patient_name, patient_id, date, hour]
+
+    verifyValues.forEach(value => {
+        if (!value) {
+            throw new AppError(400, {
+                error: "error",
+                message: "Missing data"
+            })
+        }
+    });
 
     const reqHours = Number(hour.slice(0, 2)) - 3 
     const reqMinutes = hour.slice(3, 5)
@@ -36,7 +47,6 @@ const updateAppointmentService = async (appointmentID, newAppointmentData) => {
                 const databaseFormatedDates = new Date(year, month, day, hours, minutes)
                 const dabaseDatesToMins = (databaseFormatedDates.getHours() + 4) * 60 + (databaseFormatedDates.getMinutes())
                 const reqDatesToMins = (reqFormatedDate.getHours() + 3) * 60 + (reqFormatedDate.getMinutes())
-
                 
                 if (dabaseDatesToMins < reqDatesToMins) return true
 
@@ -53,7 +63,7 @@ const updateAppointmentService = async (appointmentID, newAppointmentData) => {
     try {
         let query = "UPDATE appointment SET "
         const keys = Object.keys(newAppointmentData)
-        const values = Object.keys(newAppointmentData)
+        const values = Object.values(newAppointmentData)
 
         keys.forEach((key, index) => {
             query += `${key} = \$${index += 1}, `
@@ -61,7 +71,7 @@ const updateAppointmentService = async (appointmentID, newAppointmentData) => {
 
         query = query.slice(0, -2)
 
-        query += ` WHERE id = \$${keys.lenght += 1} RETURNING *;`
+        query += ` WHERE id = \$${keys.length += 1} RETURNING *;`
 
         const res = await database.query(
             query,
