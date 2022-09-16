@@ -1,11 +1,11 @@
 import deletePatientService from "../../services/patients/deletePatient.service";
 
 const deletePatientController = async (req, res) => {
-    const { name } = req.body
+    const { rg } = req.params
 
     try {
-        await deletePatientService(name)
-        return res.status(204).json({
+        await deletePatientService(rg)
+        return res.status(200).json({
             message: "Patient deleted with success"
         })
     } catch (error) {

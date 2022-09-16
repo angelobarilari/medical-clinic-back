@@ -5,7 +5,7 @@ const deleteResponsibleController = async (req, res) => {
 
     try {
         await deleteResponsibleService(name)
-        return res.status(204).json({
+        return res.status(200).json({
             message: "Responsible deleted with success"
         })
     } catch (error) {

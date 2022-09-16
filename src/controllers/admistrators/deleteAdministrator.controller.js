@@ -5,7 +5,7 @@ const deleteAdministratorController = async (req, res) => {
 
     try {
         await deleteAdministratorService(id)
-        return res.status(404).json({
+        return res.status(200).json({
             message: "Administrator deleted with succes"
         })
     } catch (error) {

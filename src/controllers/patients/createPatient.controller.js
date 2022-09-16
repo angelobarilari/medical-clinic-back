@@ -5,7 +5,6 @@ const createPatientController = async (req, res) => {
 
     try {
         const patient = await createPatientService(name, rg, phone, email, password, responsible_id)
-        console.log(patient)
         return res.status(201).json(patient)
     } catch (error) {
         return res.status(error.statusCode).json(error.message)
