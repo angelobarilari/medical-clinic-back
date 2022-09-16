@@ -20,21 +20,49 @@ const updateAppointmentService = async (appointmentID, newAppointmentData) => {
     const dateValues = `${date}, ${reqHours}:${reqMinutes}`
     const reqFormatedDate = new Date(dateValues);
 
-    if (doctor_crm) {
-        const doctorAppointments = await database.query(
-            `SELECT
-                *
-            FROM
-                appointment
-            WHERE
-                doctor_crm = $1`,
-            [doctor_crm]
-        )
+    const doctorAppointments = await database.query(
+        `SELECT
+            *
+        FROM
+            appointment
+        WHERE
+            doctor_crm = $1`,
+        [doctor_crm]
+    )
 
-        const appointments = doctorAppointments.rows
+    const appointments = doctorAppointments.rows
 
-        if (appointments.length > 0) {
-            const scheduleValidation = appointments.some(appointment => {
+    if (appointments.length > 0) {
+        const scheduleValidation = appointments.some(appointment => {
+            const date = appointment.date
+            const hour = appointment.hour
+
+            const year = date.getFullYear()
+            const month = date.getMonth()
+            const day = date.getDate()
+            const hours = Number(hour.slice(0, 2)) - 3 
+            const minutes = hour.slice(3, 5)
+
+            const databaseFormatedDates = new Date(year, month, day, hours, minutes)
+            const databaseDatesToHours = Date.parse(databaseFormatedDates)
+            const reqDatesToHours = Date.parse(reqFormatedDate)
+            
+            const differenceInHours = (databaseDatesToHours - reqDatesToHours) / 1000 / 60 / 60
+
+            if (Math.trunc(differenceInHours) === -1 ||
+                Math.trunc(differenceInHours) === 1  ||
+                Math.trunc(differenceInHours) === 0) return false
+
+            return true
+        });
+
+        if (!scheduleValidation) throw new AppError(409, {
+            error: "error",
+            message: "Another schedule at this time"
+        })
+
+        const cancelOrRemarkValidation = appointments.some(appointment => {
+            if (appointment.id === appointmentID) {
                 const date = appointment.date
                 const hour = appointment.hour
 
@@ -43,21 +71,23 @@ const updateAppointmentService = async (appointmentID, newAppointmentData) => {
                 const day = date.getDate()
                 const hours = Number(hour.slice(0, 2)) - 3 
                 const minutes = hour.slice(3, 5)
-
+    
                 const databaseFormatedDates = new Date(year, month, day, hours, minutes)
-                const dabaseDatesToMins = (databaseFormatedDates.getHours() + 4) * 60 + (databaseFormatedDates.getMinutes())
-                const reqDatesToMins = (reqFormatedDate.getHours() + 3) * 60 + (reqFormatedDate.getMinutes())
+                const databaseDatesToHours = Date.parse(databaseFormatedDates)
+                const cancellationAttemptTime = Date.now()
+
+                const differenceInHours = (databaseDatesToHours - cancellationAttemptTime) / 1000 / 60 / 60
                 
-                if (dabaseDatesToMins < reqDatesToMins) return true
+                if (differenceInHours <= 12) return false
 
-                return false
-            });
+                return true
+            }
+        });
 
-            if (!scheduleValidation) throw new AppError(409, {
-                error: "error",
-                message: "Another schedule at this time"
-            })
-        }
+        if (!cancelOrRemarkValidation) throw new AppError(400, {
+            error: "error",
+            message: "You cannot cancel an appointment with less than 12 hours to go"
+        })
     }
      
     try {
