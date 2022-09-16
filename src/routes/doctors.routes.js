@@ -1,4 +1,5 @@
 import { Router } from "express";
+
 import createDoctorController from "../controllers/doctors/createDoctor.controller.js"
 import deleteDoctorController from "../controllers/doctors/deleteDoctor.controller.js";
 import listDoctorByCRMController from "../controllers/doctors/listDoctorByCRM.controller.js";

@@ -5,7 +5,9 @@ const deletePatientController = async (req, res) => {
 
     try {
         await deletePatientService(name)
-        return res.status(204).send()
+        return res.status(204).json({
+            message: "Patient deleted with success"
+        })
     } catch (error) {
         return res.status(error.statusCode).json(error.message)
     }

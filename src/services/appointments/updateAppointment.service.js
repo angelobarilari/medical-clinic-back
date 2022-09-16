@@ -34,28 +34,41 @@ const updateAppointmentService = async (appointmentID, newAppointmentData) => {
 
     if (appointments.length > 0) {
         const scheduleValidation = appointments.some(appointment => {
-            if (appointment.id === appointmentID) {
+            if (appointment.iscancelled === false) {
                 const date = appointment.date
                 const hour = appointment.hour
-    
+                
                 const year = date.getFullYear()
                 const month = date.getMonth()
                 const day = date.getDate()
                 const hours = Number(hour.slice(0, 2)) - 3 
                 const minutes = hour.slice(3, 5)
-    
-                const databaseFormatedDates = new Date(year, month, day, hours, minutes)
-                const databaseDatesToMins = (databaseFormatedDates.getHours() + 3) * 60 + (databaseFormatedDates.getMinutes())
-                const reqDatesToMins = (reqFormatedDate.getHours() + 3) * 60 + (reqFormatedDate.getMinutes())
-    
-                const differenceInMinutes = databaseDatesToMins - reqDatesToMins
-                console.log(differenceInMinutes)
-    
-                if (differenceInMinutes < -60 ||
-                    differenceInMinutes > 60) return true
-    
-                return false
+                
+                function basicValidation() {
+                    if (year === reqFormatedDate.getFullYear()) {
+                        if (month === reqFormatedDate.getMonth()) {
+                            if (day === reqFormatedDate.getDate()) {
+                                return true
+                            }
+                        }
+                    }
+                }
 
+                const databaseFormatedDates = new Date(year, month, day, hours, minutes)
+
+                if (basicValidation()) {
+                    console.log("tá entrando no basic")
+                    const databaseDatesToMins = (databaseFormatedDates.getHours() + 3) * 60 + (databaseFormatedDates.getMinutes())
+                    const reqDatesToMins = (reqFormatedDate.getHours() + 3) * 60 + (reqFormatedDate.getMinutes())
+            
+                    const differenceInMinutes = databaseDatesToMins - reqDatesToMins
+            
+                    if (differenceInMinutes > -60 ||
+                        differenceInMinutes < 60) return false
+            
+                    return true
+                }
+                return true
             }
         });
 
@@ -64,8 +77,9 @@ const updateAppointmentService = async (appointmentID, newAppointmentData) => {
             message: "Another schedule at this time"
         })
 
-        const cancelOrRemarkValidation = appointments.some(appointment => {
-            if (appointment.id === appointmentID) {
+        const remarkValidation = appointments.some(appointment => {
+            if (appointment.id === appointmentID &&
+                appointment.iscancelled === false) {
                 const date = appointment.date
                 const hour = appointment.hour
 
@@ -81,15 +95,23 @@ const updateAppointmentService = async (appointmentID, newAppointmentData) => {
 
                 const differenceInHours = (databaseDatesToHours - cancellationAttemptTime) / 1000 / 60 / 60
                 
+                if (Math.sign(differenceInHours) === NaN ||
+                    Math.sign(differenceInHours) === -1 ||
+                    Math.sign(differenceInHours) === -0
+                    ) throw new AppError(400, {
+                        error: "error",
+                        message: "Inform a a valid date"
+                    })
+
                 if (differenceInHours <= 12) return false
 
                 return true
             }
         });
 
-        if (!cancelOrRemarkValidation) throw new AppError(400, {
+        if (!remarkValidation) throw new AppError(400, {
             error: "error",
-            message: "You cannot cancel an appointment with less than 12 hours to go"
+            message: "You cannot remark an appointment with less than 12 hours to go"
         })
     }
      
