@@ -5,11 +5,13 @@ import deleteDoctorController from "../controllers/doctors/deleteDoctor.controll
 import listDoctorByCRMController from "../controllers/doctors/listDoctorByCRM.controller.js";
 import listDoctorController from "../controllers/doctors/listDoctors.controller.js";
 import updateDoctorController from "../controllers/doctors/updateDoctor.controller.js";
+import authAdm from "../middlewares/authAdm.middleware.js";
+import authUser from "../middlewares/authToken.middleware.js";
 
 const routes = Router()
 
 export const doctorRoutes = () => {
-    routes.get("", listDoctorController)
+    routes.get("", authUser, authAdm, listDoctorController)
     routes.get("/:crm", listDoctorByCRMController)
     routes.post("", createDoctorController)
     routes.patch("/:crm", updateDoctorController)
