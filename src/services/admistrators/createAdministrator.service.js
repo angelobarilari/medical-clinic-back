@@ -16,12 +16,12 @@ const createAdministratorService = async (email, phone, name, password) => {
     try {
         const res = await database.query(
             `INSERT INTO
-                administrator
+                administrator(email, phone, name, password)
             VALUES
-                ($1, $2, $3, $4)`, 
+                ($1, $2, $3, $4)
+            RETURNING *;`, 
             [email, phone, name, password]
         )
-
         return res.rows[0]
     } catch (error) {
         const { message } = error
@@ -31,6 +31,10 @@ const createAdministratorService = async (email, phone, name, password) => {
                 message: "Email already registered"
             })
         
+        throw new AppError(error.statusCode).json({
+            error: "error",
+            message: error.message
+        })
     }
 }
 

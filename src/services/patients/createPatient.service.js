@@ -1,11 +1,15 @@
 import { database } from "../../data-source"
 import { AppError } from "../../errors/AppError"
+//import { passwordFunction, lowerCaseLetters, upperCaseLetters, numbers, symbols } from "../../helpers/generatePassword"
 
 const createPatientService = async (name, rg, phone, email, password, responsible_id) => {
+    console.log()
     if (!name) throw new AppError(400, {
         error: "error",
-        message: "You must be enter with a name"
+        message: "You must enter with a name"
     })
+
+    //console.log(passwordFunction(lowerCaseLetters, upperCaseLetters, numbers, rg))
     
     try {
         const res = await database.query(

@@ -13,7 +13,7 @@ export const patientRoutes = () => {
     routes.get("/all", listPatientsController)
     routes.post("", createPatientController)
     routes.patch("", updatePatientcontroller)
-    routes.delete("", deletePatientController)
+    routes.delete("/:rg", deletePatientController)
 
     return routes
 }

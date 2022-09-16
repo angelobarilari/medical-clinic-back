@@ -5,6 +5,7 @@ const createAdministratorController = async (req, res) => {
 
     try {
         const administrator = await createAdministratorService(email, phone, name, password)
+        console.log(administrator)
         return res.status(201).json(administrator)
     } catch (error) {
         return res.status(error.statusCode).json(error.message)

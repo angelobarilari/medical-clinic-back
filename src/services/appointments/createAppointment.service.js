@@ -8,7 +8,7 @@ const createAppointmentService = async (
     patientRG, 
     date, 
     hour, 
-    reqSpecialization
+    reqSpecialization,
     ) => {
     const verifyValues = [doctorCRM, patientName, patientID, date, hour, reqSpecialization]
     

@@ -6,7 +6,6 @@ import appRoutes from "./routes";
 const app = express();
 const port = 3000
 
-app.use(express.json());
 appRoutes(app)
 
 app.use((error, req, res) => {

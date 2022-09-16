@@ -8,12 +8,14 @@ const createResponsibleService = async (name, rg, phone, email, password) => {
     })
 
     try {
+        console.log("entrou no try")
+        console.log(name, rg, phone, email, password)
         const res = await database.query(
             `INSERT INTO
                 responsible(name, rg, phone, email, password)
             VALUES
                 ($1, $2, $3, $4, $5)
-            RETURNING *;`
+            RETURNING *;`,
             [name, rg, phone, email, password]
         )
 
@@ -32,6 +34,11 @@ const createResponsibleService = async (name, rg, phone, email, password) => {
                     error: "error",
                     message: "Email already registered"
                 })
+        }
+        
+        throw new AppError(350), {
+            error: "error",
+            message: error.message
         }
     }
 }

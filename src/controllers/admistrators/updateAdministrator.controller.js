@@ -15,4 +15,6 @@ const updateAdministratorController = async (req, res) => {
     }
 }
 
+export default updateAdministratorController
+
 

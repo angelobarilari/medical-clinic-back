@@ -6,9 +6,8 @@ const deleteAppointmentController = async (req, res) => {
     try {
         await deleteAppointmentService(id)
         return res.status(200).json({
-                message: "Appointment deleted with success"
-            }
-        )
+            message: "Appointment deleted with success"
+        })
     } catch (error) {
         return res.status(error.statusCode).json(error.message)
     }

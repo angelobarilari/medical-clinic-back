@@ -14,7 +14,7 @@ const updateDoctorService = async (crm, doctorData) => {
         query = query.slice(0, -2)
 
         query += ` WHERE crm = \$${keys.length += 1} RETURNING *;`
-
+        
         const res = await database.query(
             query,
             [...values, crm]

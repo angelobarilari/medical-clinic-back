@@ -13,11 +13,11 @@ const updateAdministratorService = async (id, administratorData) => {
 
         query = query.slice(0, -2)
 
-        query += ` WHERE crm = \$${keys.length += 1} RETURNING *;`
-
+        query += ` WHERE id = \$${keys.length += 1} RETURNING *;`
+        console.log(query)
         const res = await database.query(
             query,
-            [...values, cidrm]
+            [...values, id]
         )
 
         if (res.rowCount === 0) throw new AppError(404, "Administrator not found")
@@ -25,6 +25,7 @@ const updateAdministratorService = async (id, administratorData) => {
         return res.rows[0]
     } catch (error) {
         const { message } = error
+        console.log(error.message)
 
         if (message.includes("duplicate key value")) throw new AppError(409, { 
             error: "error",

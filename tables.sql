@@ -48,8 +48,9 @@ CREATE TABLE patient(
     phone VARCHAR(14),
     email VARCHAR(100) UNIQUE,
     password VARCHAR,
-    responsible_id uuid,
+    responsible_id uuid DEFAULT NULL,
     FOREIGN KEY (responsible_id) REFERENCES responsible(id)
+        ON DELETE CASCADE
 );
 
 CREATE TABLE appointment(

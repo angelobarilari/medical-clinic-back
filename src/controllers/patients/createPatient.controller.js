@@ -1,8 +1,9 @@
 import createPatientService from "../../services/patients/createPatient.service"
 
 const createPatientController = async (req, res) => {
+    console.log(req.body)
     const { name, rg, phone, email, password, responsible_id } = req.body
-
+    
     try {
         const patient = await createPatientService(name, rg, phone, email, password, responsible_id)
         console.log(patient)
