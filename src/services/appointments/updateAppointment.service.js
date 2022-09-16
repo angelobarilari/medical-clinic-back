@@ -34,26 +34,29 @@ const updateAppointmentService = async (appointmentID, newAppointmentData) => {
 
     if (appointments.length > 0) {
         const scheduleValidation = appointments.some(appointment => {
-            const date = appointment.date
-            const hour = appointment.hour
+            if (appointment.id === appointmentID) {
+                const date = appointment.date
+                const hour = appointment.hour
+    
+                const year = date.getFullYear()
+                const month = date.getMonth()
+                const day = date.getDate()
+                const hours = Number(hour.slice(0, 2)) - 3 
+                const minutes = hour.slice(3, 5)
+    
+                const databaseFormatedDates = new Date(year, month, day, hours, minutes)
+                const databaseDatesToMins = (databaseFormatedDates.getHours() + 3) * 60 + (databaseFormatedDates.getMinutes())
+                const reqDatesToMins = (reqFormatedDate.getHours() + 3) * 60 + (reqFormatedDate.getMinutes())
+    
+                const differenceInMinutes = databaseDatesToMins - reqDatesToMins
+                console.log(differenceInMinutes)
+    
+                if (differenceInMinutes < -60 ||
+                    differenceInMinutes > 60) return true
+    
+                return false
 
-            const year = date.getFullYear()
-            const month = date.getMonth()
-            const day = date.getDate()
-            const hours = Number(hour.slice(0, 2)) - 3 
-            const minutes = hour.slice(3, 5)
-
-            const databaseFormatedDates = new Date(year, month, day, hours, minutes)
-            const databaseDatesToHours = Date.parse(databaseFormatedDates)
-            const reqDatesToHours = Date.parse(reqFormatedDate)
-            
-            const differenceInHours = (databaseDatesToHours - reqDatesToHours) / 1000 / 60 / 60
-
-            if (Math.trunc(differenceInHours) === -1 ||
-                Math.trunc(differenceInHours) === 1  ||
-                Math.trunc(differenceInHours) === 0) return false
-
-            return true
+            }
         });
 
         if (!scheduleValidation) throw new AppError(409, {
