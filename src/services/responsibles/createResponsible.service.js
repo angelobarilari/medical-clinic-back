@@ -1,20 +1,20 @@
 import { database } from "../../data-source"
 import { AppError } from "../../errors/AppError"
 
-const createPatientService = async (name, rg, phone, email, password, responsible_id) => {
+const createResponsibleService = async (name, rg, phone, email, password) => {
     if (!name) throw new AppError(400, {
         error: "error",
-        message: "You must be enter with a name"
+        message: "You must enter with a name"
     })
-    
+
     try {
         const res = await database.query(
             `INSERT INTO
-                patient(name, rg, phone, email, password, responsible_id)
+                responsible(name, rg, phone, email, password)
             VALUES
-                ($1, $2, $3, $4, $5, $6)
-            RETURNING *;`,
-            [name, rg, phone, email, password, responsible_id]
+                ($1, $2, $3, $4, $5)
+            RETURNING *;`
+            [name, rg, phone, email, password]
         )
 
         return res.rows[0]
@@ -22,13 +22,13 @@ const createPatientService = async (name, rg, phone, email, password, responsibl
         const { message } = error
 
         if (message.includes("duplicate key value")) {
-            if (message.includes("patient_rg_key")) throw new AppError(409, {
+            if (message.includes("responsible_rg_key")) throw new AppError(409, {
                     error: "error",
                     message: "RG already registered"
                 })
 
 
-            if (message.includes("patient_email_key")) throw new AppError(409, { 
+            if (message.includes("responsible_email_key")) throw new AppError(409, { 
                     error: "error",
                     message: "Email already registered"
                 })
@@ -36,5 +36,5 @@ const createPatientService = async (name, rg, phone, email, password, responsibl
     }
 }
 
-export default createPatientService
+export default createResponsibleService
 

@@ -58,6 +58,7 @@ CREATE TABLE appointment(
     patient_name VARCHAR(200) NOT NULL,
   	patient_id uuid NOT NULL,
     patient_rg VARCHAR(10),
+    isCancelled BOOLEAN DEFAULT FALSE,
     date DATE NOT NULL,
     hour TIME NOT NULL,
     FOREIGN KEY (doctor_crm) REFERENCES doctor(crm),

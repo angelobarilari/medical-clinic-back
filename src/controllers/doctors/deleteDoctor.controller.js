@@ -5,7 +5,9 @@ const deleteDoctorController = async (req, res) => {
     
     try {
         await deleteDoctorService(crm)
-        return res.status(204).send()
+        return res.status(204).json({
+            message: "Doctor deleted with success"
+        })
     } catch (error) {
         return res.status(error.statusCode).json(error.message)
     }

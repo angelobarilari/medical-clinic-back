@@ -1,4 +1,5 @@
 import { Router } from "express"
+
 import createPatientController from "../controllers/patients/createPatient.controller"
 import deletePatientController from "../controllers/patients/deletePatient.controller"
 import listAPatientController from "../controllers/patients/listAPatient.controller"

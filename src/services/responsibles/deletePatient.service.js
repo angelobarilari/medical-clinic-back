@@ -1,7 +1,7 @@
 import { database } from "../../data-source"
 import { AppError } from "../../errors/AppError"
 
-const deletePatientService = async (name) => {
+const deleteResponsibleService = async (name) => {
     if (!name) {
         throw new AppError(400, {
             error: "error",
@@ -11,7 +11,7 @@ const deletePatientService = async (name) => {
 
     const res = await database.query(
         `DELETE FROM
-            patient
+            responsible
         WHERE
             name = $1;`,
         [name]
@@ -19,8 +19,8 @@ const deletePatientService = async (name) => {
 
     if(res.rowCount === 0) throw new AppError(404, {
             error: "error",
-            message: "Patient not found"
+            message: "Responsible not found"
         })
 }
 
-export default deletePatientService
+export default deleteResponsibleService
