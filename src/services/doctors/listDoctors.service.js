@@ -8,7 +8,6 @@ const listDoctorService = async () => {
             doctor`,
         []
     )
-
     return res.rows
 }
 
