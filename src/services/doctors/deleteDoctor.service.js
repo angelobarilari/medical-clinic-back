@@ -5,7 +5,7 @@ const deleteDoctorService = async (crm) => {
     if (!crm) {
         throw new AppError(400, {
             error: "error",
-            message: "Missing data"
+            message: "Missing CRM"
         })
     }
 
@@ -17,9 +17,10 @@ const deleteDoctorService = async (crm) => {
         [crm]
     )
 
-    if(res.rowCount === 0){
-        throw new AppError(404, "Doctor not found")
-    }
+    if(res.rowCount === 0) throw new AppError(404, {
+        error: "error",
+        message: "Doctor not found"
+    })
 }
 
 export default deleteDoctorService

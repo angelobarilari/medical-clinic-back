@@ -6,9 +6,7 @@ const listDoctorByCRMController = async (req, res) => {
         const doctor = await listDoctorByCRMService(crm)
         return res.status(200).json(doctor)
     } catch (error) {
-        return res.status(error.statusCode).json({
-            message: error.message
-        })
+        return res.status(error.statusCode).json(error.message)
     }
 }
 

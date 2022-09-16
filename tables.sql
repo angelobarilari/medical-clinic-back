@@ -28,7 +28,7 @@ CREATE TABLE doctor(
     phone VARCHAR(14) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
     specialization VARCHAR(200) NOT NULL,
-    isAvailable BOOLEAN,
+    isAvailable BOOLEAN TRUE,
     password VARCHAR NOT NULL
 );
 
@@ -52,18 +52,17 @@ CREATE TABLE patient(
     FOREIGN KEY (responsible_id) REFERENCES responsible(id)
 );
 
-CREATE TABLE consultation(
+CREATE TABLE appointment(
     id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
     doctor_crm VARCHAR(200) NOT NULL,
-    doctor_id uuid UNIQUE NOT NULL,
     patient_name VARCHAR(200) NOT NULL,
-  	patient_id uuid UNIQUE NOT NULL,
-    patient_rg VARCHAR(10) UNIQUE,
-    date DATE,
-    hour TIME,
+  	patient_id uuid NOT NULL,
+    patient_rg VARCHAR(10),
+    date DATE NOT NULL,
+    hour TIME NOT NULL,
     FOREIGN KEY (doctor_crm) REFERENCES doctor(crm),
-    FOREIGN KEY (doctor_id) REFERENCES doctor(id),
     FOREIGN KEY (patient_rg) REFERENCES patient(rg),
     FOREIGN KEY (patient_id) REFERENCES patient(id)
 );
+
 

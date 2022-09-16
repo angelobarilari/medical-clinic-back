@@ -1,16 +1,16 @@
 import { database } from "../../data-source";
 
-const listDoctorService = async () => {
+const listAppointmentsService = async () => {
     const res = await database.query(
         `SELECT
             *
         FROM
-            doctor`,
+            appointment`,
         []
     )
 
     return res.rows
 }
 
-export default listDoctorService
+export default listAppointmentsService
 
