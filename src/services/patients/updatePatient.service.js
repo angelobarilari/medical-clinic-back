@@ -1,11 +1,11 @@
 import { database } from "../../data-source"
 import { AppError } from "../../errors/AppError"
 
-const updateDoctorService = async (crm, doctorData) => {
+const updatePatientService = async (patientIdentification, newPatientData) => {
     try {
-        let query = "UPDATE doctor SET "
-        const keys = Object.keys(doctorData)
-        const values = Object.values(doctorData)
+        let query = "UPDATE patient SET "
+        const keys = Object.keys(newPatientData)
+        const values = Object.values(newPatientData)
 
         keys.forEach((key, index) => {
             query += `${key} = \$${index += 1}, `
@@ -13,26 +13,26 @@ const updateDoctorService = async (crm, doctorData) => {
 
         query = query.slice(0, -2)
 
-        query += ` WHERE crm = \$${keys.length += 1} RETURNING *;`
+        query += ` WHERE name = \$${keys.length += 1} RETURNING *;`
 
         const res = await database.query(
             query,
-            [...values, crm]
+            [...values, patientIdentification]
         )
 
-        if (res.rowCount === 0) throw new AppError(404, "Doctor not found")
+        if (res.rowCount === 0) throw new AppError(404, "Patient not found")
 
         return res.rows[0]
     } catch (error) {
         const { message } = error
 
         if (message.includes("duplicate key value")) {
-            if (message.includes("doctor_crm_key")) throw new AppError(409, {
+            if (message.includes("patient_rg_key")) throw new AppError(409, {
                     error: "error",
-                    message: "CRM already registered"
+                    message: "RG already registered"
                 })
 
-            if (message.includes("doctor_email_key")) throw new AppError(409, { 
+            if (message.includes("patient_email_key")) throw new AppError(409, { 
                     error: "error",
                     message: "Email already registered"
                 })
@@ -45,5 +45,4 @@ const updateDoctorService = async (crm, doctorData) => {
     }
 }
 
-export default updateDoctorService
-
+export default updatePatientService

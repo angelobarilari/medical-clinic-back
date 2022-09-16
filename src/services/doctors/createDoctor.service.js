@@ -21,26 +21,22 @@ const createDoctorService = async (name, crm, phone, email, specialization, pass
                 ($1, $2, $3, $4, $5, $6)
             RETURNING *;`,
             [name, crm, phone, email, specialization, password]
-        );
+        )
         
         return res.rows[0]
     } catch(error) {
         const { message } = error
 
         if (message.includes("duplicate key value")) {
-            if (message.includes("doctor_crm_key")) {
-                throw new AppError(409, {
+            if (message.includes("doctor_crm_key")) throw new AppError(409, {
                     error: "error",
                     message: "CRM already registered"
                 })
-            }
 
-            if (message.includes("doctor_email_key")) {
-                throw new AppError(409, { 
+            if (message.includes("doctor_email_key")) throw new AppError(409, { 
                     error: "error",
                     message: "Email already registered"
                 })
-            }
         }
     }
 }

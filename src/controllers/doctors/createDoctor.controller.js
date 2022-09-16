@@ -1,4 +1,3 @@
-import { AppError } from "../../errors/AppError"
 import createDoctorService from "../../services/doctors/createDoctor.service"
 
 const createDoctorController = async (req, res) => {

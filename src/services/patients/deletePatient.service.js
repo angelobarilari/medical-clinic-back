@@ -1,8 +1,8 @@
 import { database } from "../../data-source"
 import { AppError } from "../../errors/AppError"
 
-const listDoctorByCRMService = async (crm) => {
-    if (!crm) {
+const deletePatientService = async (name) => {
+    if (!name) {
         throw new AppError(400, {
             error: "error",
             message: "Missing data"
@@ -10,21 +10,17 @@ const listDoctorByCRMService = async (crm) => {
     }
 
     const res = await database.query(
-        `SELECT 
-            *
-        FROM
-            doctor
+        `DELETE FROM
+            patient
         WHERE
-            crm = $1;`,
-        [crm]
+            name = $1;`,
+        [name]
     )
 
     if(res.rowCount === 0) throw new AppError(404, {
             error: "error",
-            message: "Doctor not found"
+            message: "Patient not found"
         })
-
-    return res.rows[0]
 }
 
-export default listDoctorByCRMService
+export default deletePatientService
