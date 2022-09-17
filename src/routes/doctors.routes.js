@@ -11,11 +11,11 @@ import authUser from "../middlewares/authToken.middleware.js";
 const routes = Router()
 
 export const doctorRoutes = () => {
-    routes.get("", authUser, authAdm, listDoctorController)
+    routes.get("", listDoctorController)
     routes.get("/:crm", listDoctorByCRMController)
-    routes.post("", createDoctorController)
-    routes.patch("/:crm", updateDoctorController)
-    routes.delete("/:crm", deleteDoctorController)
+    routes.post("", authUser, authAdm, createDoctorController)
+    routes.patch("/:crm", authUser, authAdm, updateDoctorController)
+    routes.delete("/:crm", authUser, authAdm, deleteDoctorController)
 
     return routes
 }

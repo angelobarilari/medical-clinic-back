@@ -9,7 +9,7 @@ const userLoginController = async (req, res) => {
             token: userLogin
         })
     } catch (error) {
-        return res.status(error.statusCode).json(error.message)
+        return res.status(404).json(error.message)
     }
 
 }
