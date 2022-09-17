@@ -9,12 +9,11 @@ const database = new Client(
     ? {
         user: "postgres",
         host: "localhost",
-        database: process.env.POSTGRES_DB_TEST,
+        database: "tests_products",
         password: "1234",
         port: 5432,
       }
     : {
-        type: "postgres",
         url: process.env.DATABASE_URL,
         ssl: process.env.NODE_ENV === "production"
             ? { rejectUnauthorized: false }
@@ -23,7 +22,6 @@ const database = new Client(
 );
 
 const app = express();
-const port = 3000
 
 app.use(express.json());
 appRoutes(app)
@@ -42,7 +40,9 @@ app.use((error, req, res) => {
     })
 })
 
-app.listen(process.env.PORT || 3000, async () => {
+let port = process.env.PORT || 3000
+
+app.listen(port, async () => {
     console.log(`Server is running in port ${port}`)
     await database.connect()
     console.log("running")
