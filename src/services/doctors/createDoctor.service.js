@@ -1,5 +1,6 @@
 import { database } from "../../data-source"
 import { AppError } from "../../errors/AppError";
+import { hash } from "bcrypt";
 
 const createDoctorService = async (name, crm, phone, email, specialization, password) => {
     const verifyValues = [name, crm, phone, email, specialization, password]
@@ -12,6 +13,8 @@ const createDoctorService = async (name, crm, phone, email, specialization, pass
             })
         }
     });
+
+    const hashedPassword = await hash(randomPassword, 10)
     
     try {
         const res = await database.query(
@@ -20,7 +23,7 @@ const createDoctorService = async (name, crm, phone, email, specialization, pass
             VALUES
                 ($1, $2, $3, $4, $5, $6)
             RETURNING *;`,
-            [name, crm, phone, email, specialization, password]
+            [name, crm, phone, email, specialization, hashedPassword]
         )
         
         return res.rows[0]

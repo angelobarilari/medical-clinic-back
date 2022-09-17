@@ -1,11 +1,27 @@
 import { database } from "../../data-source"
 import { AppError } from "../../errors/AppError"
+import { lowerCaseLetters, 
+    upperCaseLetters, 
+    numbers, 
+    symbols, 
+    passwordFunction } from "../../helpers/generatePassword"
+import { hash } from "bcrypt"
 
-const createResponsibleService = async (name, rg, phone, email, password) => {
+const createResponsibleService = async (name, rg, phone, email) => {
     if (!name) throw new AppError(400, {
         error: "error",
         message: "You must enter with a name"
     })
+
+    const randomPassword = passwordFunction(lowerCaseLetters, 
+        upperCaseLetters, 
+        numbers, 
+        symbols, 
+        passwordFunction, 
+        rg
+    )
+
+    const hashedPassword = await hash(randomPassword, 10)
 
     try {
         const res = await database.query(
@@ -14,7 +30,7 @@ const createResponsibleService = async (name, rg, phone, email, password) => {
             VALUES
                 ($1, $2, $3, $4, $5)
             RETURNING *;`
-            [name, rg, phone, email, password]
+            [name, rg, phone, email, hashedPassword]
         )
 
         return res.rows[0]
