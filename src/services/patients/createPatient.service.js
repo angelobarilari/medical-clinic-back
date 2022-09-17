@@ -1,12 +1,28 @@
 import { database } from "../../data-source"
 import { AppError } from "../../errors/AppError"
+import { lowerCaseLetters, 
+         upperCaseLetters, 
+         numbers, 
+         symbols, 
+         passwordFunction } from "../../helpers/generatePassword"
+import { hash } from "bcrypt"
 
-const createPatientService = async (name, rg, phone, email, password, responsible_id) => {
+const createPatientService = async (name, rg, phone, email, responsible_id) => {
     if (!name) throw new AppError(400, {
         error: "error",
-        message: "You must be enter with a name"
+        message: "You must enter with a name"
     })
-    
+
+    const randomPassword = passwordFunction(lowerCaseLetters, 
+        upperCaseLetters, 
+        numbers, 
+        symbols, 
+        passwordFunction, 
+        rg
+    )
+
+    const hashedPassword = await hash(randomPassword, 10)
+
     try {
         const res = await database.query(
             `INSERT INTO
@@ -14,7 +30,7 @@ const createPatientService = async (name, rg, phone, email, password, responsibl
             VALUES
                 ($1, $2, $3, $4, $5, $6)
             RETURNING *;`,
-            [name, rg, phone, email, password, responsible_id]
+            [name, rg, phone, email, hashedPassword, responsible_id]
         )
 
         return res.rows[0]
@@ -33,6 +49,11 @@ const createPatientService = async (name, rg, phone, email, password, responsibl
                     message: "Email already registered"
                 })
         }
+
+        throw new AppError(400, {
+            error: "error",
+            message: error.message
+        })
     }
 }
 
