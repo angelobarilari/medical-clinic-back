@@ -14,7 +14,7 @@ const createDoctorService = async (name, crm, phone, email, specialization, pass
         }
     });
 
-    const hashedPassword = await hash(randomPassword, 10)
+    const hashedPassword = await hash(password, 10)
     
     try {
         const res = await database.query(
@@ -30,6 +30,8 @@ const createDoctorService = async (name, crm, phone, email, specialization, pass
     } catch(error) {
         const { message } = error
 
+        console.log(message)
+
         if (message.includes("duplicate key value")) {
             if (message.includes("doctor_crm_key")) throw new AppError(409, {
                     error: "error",
@@ -41,6 +43,10 @@ const createDoctorService = async (name, crm, phone, email, specialization, pass
                     message: "Email already registered"
                 })
         }
+
+        throw new AppError(error.statusCode, {
+            message: error.message
+        })
     }
 }
 

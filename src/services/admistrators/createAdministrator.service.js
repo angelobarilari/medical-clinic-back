@@ -14,7 +14,7 @@ const createAdministratorService = async (email, phone, name, password) => {
         }
     });
 
-    const hashedPassword = await hash(randomPassword, 10)
+    const hashedPassword = await hash(password, 10)
 
     try {
         const res = await database.query(
