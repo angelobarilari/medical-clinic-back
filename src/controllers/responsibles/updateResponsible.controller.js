@@ -3,7 +3,7 @@ import updateResponsibleService from "../../services/responsibles/updateResponsi
 const updateResponsibleController = async (req, res) => {
     const newResponsibleData = req.body
     const { responsibleIdentification } = req.body
-    delete newPatientData.patientIdentification
+    delete newResponsibleData.responsibleIdentification
 
     try {
         const updatedResponsible = await updateResponsibleService(responsibleIdentification, newResponsibleData)

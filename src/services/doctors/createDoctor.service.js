@@ -1,5 +1,6 @@
 import { database } from "../../data-source"
 import { AppError } from "../../errors/AppError";
+import { hash } from "bcrypt";
 
 const createDoctorService = async (name, crm, phone, email, specialization, password) => {
     const verifyValues = [name, crm, phone, email, specialization, password]
@@ -12,6 +13,8 @@ const createDoctorService = async (name, crm, phone, email, specialization, pass
             })
         }
     });
+
+    const hashedPassword = await hash(password, 10)
     
     try {
         const res = await database.query(
@@ -20,12 +23,14 @@ const createDoctorService = async (name, crm, phone, email, specialization, pass
             VALUES
                 ($1, $2, $3, $4, $5, $6)
             RETURNING *;`,
-            [name, crm, phone, email, specialization, password]
+            [name, crm, phone, email, specialization, hashedPassword]
         )
         
         return res.rows[0]
     } catch(error) {
         const { message } = error
+
+        console.log(message)
 
         if (message.includes("duplicate key value")) {
             if (message.includes("doctor_crm_key")) throw new AppError(409, {
@@ -38,6 +43,10 @@ const createDoctorService = async (name, crm, phone, email, specialization, pass
                     message: "Email already registered"
                 })
         }
+
+        throw new AppError(error.statusCode, {
+            message: error.message
+        })
     }
 }
 
