@@ -1,5 +1,6 @@
 import { database } from "../../data-source";
 import { AppError } from "../../errors/AppError";
+import { hash } from "bcrypt";
 
 const createAdministratorService = async (email, phone, name, password) => {
     const verifyValues = [email, phone, name, password]
@@ -13,13 +14,15 @@ const createAdministratorService = async (email, phone, name, password) => {
         }
     });
 
+    const hashedPassword = await hash(randomPassword, 10)
+
     try {
         const res = await database.query(
             `INSERT INTO
                 administrator
             VALUES
                 ($1, $2, $3, $4)`, 
-            [email, phone, name, password]
+            [email, phone, name, hashedPassword]
         )
 
         return res.rows[0]
