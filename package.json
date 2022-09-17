@@ -6,7 +6,9 @@
   "author": "angel <angelomelo_tdai@hotmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon ./src/app.js"
+    "dev": "nodemon ./src/app.js",
+    "build": "tsc",
+    "start": "npm run node dist/app.js"
   },
   "dependencies": {
     "cross-env": "^7.0.3",
