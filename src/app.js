@@ -1,27 +1,10 @@
 import express, { response } from "express";
 import { AppError } from "./errors/AppError";
+import { startDatabase } from "./data-source";
 import appRoutes from "./routes";
-import { Client } from "pg";
-import "dotenv/config"
-
-const database = new Client(
-  process.env.NODE_ENV === "test"
-    ? {
-        user: "postgres",
-        host: "localhost",
-        database: "tests_products",
-        password: "1234",
-        port: 5432,
-      }
-    : {
-        url: process.env.DATABASE_URL,
-        ssl: process.env.NODE_ENV === "production"
-            ? { rejectUnauthorized: false }
-            : false
-      }
-);
 
 const app = express();
+const port = 3000
 
 app.use(express.json());
 appRoutes(app)
@@ -40,12 +23,10 @@ app.use((error, req, res) => {
     })
 })
 
-let port = process.env.PORT || 3000
-
-app.listen(port, async () => {
+app.listen(process.env.PORT || 3000, () => {
     console.log(`Server is running in port ${port}`)
-    await database.connect()
-    console.log("running")
+    startDatabase();
 });
+
 
 export default app
