@@ -21,5 +21,6 @@ export const database = new Client(
 );
 
 export const startDatabase = async () => {
+  console.log("database")
   await database.connect();
 };
