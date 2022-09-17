@@ -6,16 +6,17 @@ export const database = new Client(
     ? {
         user: "postgres",
         host: "localhost",
-        database: "tests_products",
+        database: process.env.POSTGRES_DB_TEST,
         password: "1234",
         port: 5432,
       }
     : {
-        user: process.env.DB_USER,
-        password: process.env.DB_PASSWORD,
-        host: process.env.DB_HOST,
-        database: process.env.DB,
-        port: process.env.DB_PORT,
+        type: "postgres",
+        url: process.env.DATABASE_URL,
+        ssl:
+          process.env.NODE_ENV === "production"
+            ? { rejectUnauthorized: false }
+            : false
       }
 );
 
