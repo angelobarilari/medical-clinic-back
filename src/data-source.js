@@ -1,5 +1,4 @@
-
-/*import { Client } from "pg";
+import { Client } from "pg";
 import "dotenv/config"
 
 export const database = new Client(
@@ -22,7 +21,5 @@ export const database = new Client(
 );
 
 export const startDatabase = async () => {
-  console.log("database")
   await database.connect();
 };
-*/
