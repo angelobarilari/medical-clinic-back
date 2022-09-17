@@ -1,7 +1,26 @@
 import express, { response } from "express";
 import { AppError } from "./errors/AppError";
-import { startDatabase } from "./data-source";
 import appRoutes from "./routes";
+import { Client } from "pg";
+import "dotenv/config"
+
+const database = new Client(
+  process.env.NODE_ENV === "test"
+    ? {
+        user: "postgres",
+        host: "localhost",
+        database: process.env.POSTGRES_DB_TEST,
+        password: "1234",
+        port: 5432,
+      }
+    : {
+        type: "postgres",
+        url: process.env.DATABASE_URL,
+        ssl: process.env.NODE_ENV === "production"
+            ? { rejectUnauthorized: false }
+            : false
+      }
+);
 
 const app = express();
 const port = 3000
@@ -23,10 +42,10 @@ app.use((error, req, res) => {
     })
 })
 
-app.listen(process.env.PORT || 3000, () => {
+app.listen(process.env.PORT || 3000, async () => {
     console.log(`Server is running in port ${port}`)
-    startDatabase();
+    await database.connect()
+    console.log("running")
 });
-
 
 export default app
