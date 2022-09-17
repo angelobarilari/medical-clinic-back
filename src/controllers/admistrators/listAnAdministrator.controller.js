@@ -11,3 +11,5 @@ const listAnAdministratorController = async (req, res) => {
     }
 }
 
+export default listAnAdministratorController
+

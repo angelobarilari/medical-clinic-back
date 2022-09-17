@@ -11,8 +11,9 @@ const updateAdministratorController = async (req, res) => {
             updatedAdministrator
         })
     } catch (error) {
-        return res.status(error.statusCode).json(error.message)
+        return res.status(300).json(error.message)
     }
 }
 
+export default updateAdministratorController
 
