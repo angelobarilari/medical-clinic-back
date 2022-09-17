@@ -2131,6 +2131,11 @@ negotiator@0.6.3:
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.3.tgz#58e323a72fedc0d6f9cd4d31fe49f51479590ccd"
   integrity sha512-+EUsqGPLsM+j/zdChZjsnX51g4XrHFOIXwfnCVPGlQk/k5giakcKsuxCObBRu6DSm9opw/O6slWbJdghQM4bBg==
 
+node-bin-setup@^1.0.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/node-bin-setup/-/node-bin-setup-1.1.0.tgz#9df94c41335a8f41958a639b2736f860582a209c"
+  integrity sha512-pTeU6NgUrexiLNtd+AKwvg6cngHMvj5FZ5e2bbv2ogBSIc9yhkXSSaTScfSRZnwHIh5YFmYSYlemLWkiKD7rog==
+
 node-int64@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/node-int64/-/node-int64-0.4.0.tgz#87a9065cdb355d3182d8f94ce11188b825c68a3b"
@@ -2140,6 +2145,13 @@ node-releases@^2.0.6:
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/node-releases/-/node-releases-2.0.6.tgz#8a7088c63a55e493845683ebf3c828d8c51c5503"
   integrity sha512-PiVXnNuFm5+iYkLBNeq5211hvO38y63T0i2KKh2KnUs3RpzJ+JtODFjkD8yjLwnDkTYF1eKXheUwdssR+NRZdg==
+
+node@^18.9.0:
+  version "18.9.0"
+  resolved "https://registry.yarnpkg.com/node/-/node-18.9.0.tgz#e2dfeba8e0a04c6397371d5118f3e4ff918e2cd7"
+  integrity sha512-s+JrNt8qOeV2Uci4aYs7jsFSRXgko7jThozysqeZ2bJGp3PGaBKA+kpCCP+TDrg4TRcTLyw3bcHCJx9drxTQtQ==
+  dependencies:
+    node-bin-setup "^1.0.0"
 
 nodemon@^2.0.19:
   version "2.0.19"

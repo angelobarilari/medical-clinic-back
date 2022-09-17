@@ -17,8 +17,6 @@ export const database = new Client(
           process.env.NODE_ENV === "production"
             ? { rejectUnauthorized: false }
             : false,
-        synchronize: false,
-        logging: true,
         user: process.env.DB_USER,
         password: process.env.DB_PASSWORD,
         host: process.env.DB_HOST,
