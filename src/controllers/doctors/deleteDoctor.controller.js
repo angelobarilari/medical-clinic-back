@@ -1,4 +1,4 @@
-import deleteDoctorService from "../../services/doctors/deleteDoctor.service"
+import deleteDoctorService from "../../services/doctors/deleteDoctor.service.js"
 
 const deleteDoctorController = async (req, res) => {
     const { crm } = req.params

@@ -1,12 +1,12 @@
 import { Router } from "express";
 
-import createAdministratorController from "../controllers/admistrators/createAdministrator.controller";
-import deleteAdministratorController from "../controllers/admistrators/deleteAdministrator.controller";
-import listAdministratorsController from "../controllers/admistrators/listAdministrators.controller";
-import listAnAdministratorController from "../controllers/admistrators/listAnAdministrator.controller";
-import updateAdministratorController from "../controllers/admistrators/updateAdministrator.controller";
-import authAdm from "../middlewares/authAdm.middleware"
-import authToken from "../middlewares/authToken.middleware"
+import createAdministratorController from "../controllers/admistrators/createAdministrator.controller.js";
+import deleteAdministratorController from "../controllers/admistrators/deleteAdministrator.controller.js";
+import listAdministratorsController from "../controllers/admistrators/listAdministrators.controller.js";
+import listAnAdministratorController from "../controllers/admistrators/listAnAdministrator.controller.js";
+import updateAdministratorController from "../controllers/admistrators/updateAdministrator.controller.js";
+import authAdm from "../middlewares/authAdm.middleware.js"
+import authToken from "../middlewares/authToken.middleware.js"
 
 const routes = Router()
 

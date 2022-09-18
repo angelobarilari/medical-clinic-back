@@ -1,4 +1,4 @@
-import deleteAppointmentService from "../../services/appointments/deleteAppointment.service"
+import deleteAppointmentService from "../../services/appointments/deleteAppointment.service.js"
 
 const deleteAppointmentController = async (req, res) => {
     const { id } = req.params

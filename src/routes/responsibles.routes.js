@@ -1,12 +1,12 @@
 import { Router } from "express";
 
-import createResponsibleController from "../controllers/responsibles/createResponsible.controller";
-import deleteResponsibleController from "../controllers/responsibles/deleteResponsible.controller";
-import listAResponsibleController from "../controllers/responsibles/listAResponsible.controllers";
-import listResponsiblesController from "../controllers/responsibles/listResponsibles.controller";
-import updateResponsibleController from "../controllers/responsibles/updateResponsible.controller";
-import authAdm from "../middlewares/authAdm.middleware";
-import authUser from "../middlewares/authToken.middleware";
+import createResponsibleController from "../controllers/responsibles/createResponsible.controller.js";
+import deleteResponsibleController from "../controllers/responsibles/deleteResponsible.controller.js";
+import listAResponsibleController from "../controllers/responsibles/listAResponsible.controllers.js";
+import listResponsiblesController from "../controllers/responsibles/listResponsibles.controller.js";
+import updateResponsibleController from "../controllers/responsibles/updateResponsible.controller.js";
+import authAdm from "../middlewares/authAdm.middleware.js";
+import authUser from "../middlewares/authToken.middleware.js";
 
 const routes = Router()
 

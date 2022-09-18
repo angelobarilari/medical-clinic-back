@@ -1,4 +1,4 @@
-import updateDoctorService from "../../services/doctors/updateDoctor.service"
+import updateDoctorService from "../../services/doctors/updateDoctor.service.js"
 
 const updateDoctorController = async (req, res) => {
     const { crm } = req.params

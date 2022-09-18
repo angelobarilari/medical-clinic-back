@@ -1,4 +1,6 @@
-import { Client } from "pg";
+import pkg from 'pg';
+const { Client } = pkg;
+
 import "dotenv/config"
 
 export const database = new Client(

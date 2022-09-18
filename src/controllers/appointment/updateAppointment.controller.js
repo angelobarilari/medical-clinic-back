@@ -1,4 +1,4 @@
-import updateAppointmentService from "../../services/appointments/updateAppointment.service";
+import updateAppointmentService from "../../services/appointments/updateAppointment.service.js";
 
 const updateAppointmentController = async (req, res) => {
     const newAppointmentData = req.body
