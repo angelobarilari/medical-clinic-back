@@ -22,7 +22,6 @@ export const database = new Client(
 );
 
 export const startDatabase = async () => {
-  console.log("ta no database")
+  console.log("Database connected")
   await database.connect();
-  console.log("n conectou")
 };
