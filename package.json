@@ -5,6 +5,7 @@
   "repository": "https://github.com/angelobarilari/medical-clinic-back",
   "author": "angel <angelomelo_tdai@hotmail.com>",
   "license": "MIT",
+  "type": "module",
   "engines": {
     "node": "16.16.0"
   },
