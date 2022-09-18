@@ -1,4 +1,4 @@
-import updatePatientService from "../../services/patients/updatePatient.service"
+import updatePatientService from "../../services/patients/updatePatient.service.js"
 
 const updatePatientController = async (req, res) => {
     const newPatientData = req.body

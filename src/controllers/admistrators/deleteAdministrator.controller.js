@@ -1,4 +1,4 @@
-import deleteAdministratorService from "../../services/admistrators/deleteAdministrator.service";
+import deleteAdministratorService from "../../services/admistrators/deleteAdministrator.service.js";
 
 const deleteAdministratorController = async (req, res) => {
     const { id } = req.params

@@ -1,4 +1,4 @@
-import listResponsiblesService from "../../services/responsibles/listResponsibles.service"
+import listResponsiblesService from "../../services/responsibles/listResponsibles.service.js"
 
 const listResponsiblesController = async (req, res) => {
     const responsibles = await listResponsiblesService()

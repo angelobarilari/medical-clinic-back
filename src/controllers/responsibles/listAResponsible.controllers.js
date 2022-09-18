@@ -1,4 +1,4 @@
-import listAResponsibleService from "../../services/responsibles/listAResponsible.service";
+import listAResponsibleService from "../../services/responsibles/listAResponsible.service.js";
 
 const listAResponsibleController = async (req, res) => {
     const { name } = req.body

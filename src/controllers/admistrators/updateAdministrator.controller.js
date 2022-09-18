@@ -1,4 +1,4 @@
-import updateAdministratorService from "../../services/admistrators/updateAdministrator.service";
+import updateAdministratorService from "../../services/admistrators/updateAdministrator.service.js";
 
 const updateAdministratorController = async (req, res) => {
     const { id } = req.params

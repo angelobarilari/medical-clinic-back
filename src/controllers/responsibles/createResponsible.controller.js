@@ -1,4 +1,4 @@
-import createResponsibleService from "../../services/responsibles/createResponsible.service"
+import createResponsibleService from "../../services/responsibles/createResponsible.service.js"
 
 const createResponsibleController = async (req, res) => {
     const { name, rg, phone, email } = req.body

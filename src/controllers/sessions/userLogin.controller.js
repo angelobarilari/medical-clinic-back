@@ -1,4 +1,4 @@
-import userLoginService from "../../services/sessions/userLogin.service";
+import userLoginService from "../../services/sessions/userLogin.service.js";
 
 const userLoginController = async (req, res) => {
     const { phone, email, password } = req.body

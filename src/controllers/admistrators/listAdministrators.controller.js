@@ -1,4 +1,4 @@
-import listAdministratorsService from "../../services/admistrators/listAdministrators.service";
+import listAdministratorsService from "../../services/admistrators/listAdministrators.service.js";
 
 const listAdministratorsController = async (req, res) => {
     const administrators = await listAdministratorsService()
