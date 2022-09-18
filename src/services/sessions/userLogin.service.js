@@ -1,4 +1,4 @@
-import { database } from "../../data-source.mjs"
+import { database } from "../../data-source.js"
 import { AppError } from "../../errors/AppError.js"
 import { patientQueries, doctorQueries, responsibleQueries, administratorQueries } from "./helpersQueries"
 import { compare } from "bcrypt"

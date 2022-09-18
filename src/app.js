@@ -1,6 +1,6 @@
 import express, { response } from "express";
 import { AppError } from "./errors/AppError.js";
-import { startDatabase } from "./data-source.mjs";
+import { startDatabase } from "./data-source.js";
 import appRoutes from "./routes/index.js";
 
 const app = express();

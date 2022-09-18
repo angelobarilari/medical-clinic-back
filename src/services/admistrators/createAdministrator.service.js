@@ -1,4 +1,4 @@
-import { database } from "../../data-source.mjs";
+import { database } from "../../data-source.js";
 import { AppError } from "../../errors/AppError.js";
 import { hash } from "bcrypt";
 import { v4 as uuidv4 } from "uuid";

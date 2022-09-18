@@ -1,4 +1,4 @@
-import { database } from "../../data-source.mjs"
+import { database } from "../../data-source.js"
 import { AppError } from "../../errors/AppError.js"
 
 const deleteDoctorService = async (crm) => {

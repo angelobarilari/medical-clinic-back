@@ -1,18 +1,19 @@
 import { Client } from "pg";
 import "dotenv/config"
 
+//const isProduction = process.env.NODE_ENV === "production"
+
 export const database = new Client(
   process.env.NODE_ENV === "test"
     ? {
         user: "postgres",
         host: "localhost",
-        database: process.env.POSTGRES_DB_TEST,
+        database: "tests_products",
         password: "1234",
         port: 5432,
       }
     : {
-        type: "postgres",
-        url: process.env.DATABASE_URL,
+        connectionString: process.env.NODE_ENV,
         ssl:
           process.env.NODE_ENV === "production"
             ? { rejectUnauthorized: false }
