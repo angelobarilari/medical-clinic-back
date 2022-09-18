@@ -1,8 +1,6 @@
 import { Client } from "pg";
 import "dotenv/config"
 
-//const isProduction = process.env.NODE_ENV === "production"
-
 export const database = new Client(
   process.env.NODE_ENV === "test"
     ? {
@@ -22,5 +20,7 @@ export const database = new Client(
 );
 
 export const startDatabase = async () => {
+  console.log("ta no database")
   await database.connect();
+  console.log("n conectou")
 };
