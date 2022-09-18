@@ -3,6 +3,7 @@ import { AppError } from "../../errors/AppError.js"
 import { patientQueries, doctorQueries, responsibleQueries, administratorQueries } from "./helpersQueries"
 import { compare } from "bcrypt"
 import jwt from "jsonwebtoken"
+import "dotenv/config"
 
 async function tokenSettings (userData, password) {
   const verifyPassword = await compare(password, userData.rows[0].password)
@@ -18,7 +19,7 @@ async function tokenSettings (userData, password) {
       crm: userData.rows[0].crm,
       isAdm: userData.rows[0].isadm
     },
-    "SECRET_KEY",
+    process.env.JWT_SECRET,
     {
       expiresIn: "24h",
       subject: userData.rows[0].id
