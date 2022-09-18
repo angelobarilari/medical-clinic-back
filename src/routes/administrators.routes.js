@@ -11,11 +11,11 @@ import authToken from "../middlewares/authToken.middleware"
 const routes = Router()
 
 export const adminsitratorRoutes = () => {
-    routes.get("", listAnAdministratorController)
-    routes.get("/all", listAdministratorsController)
+    routes.get("", authToken, authAdm, listAnAdministratorController)
+    routes.get("/all", authToken, authAdm, listAdministratorsController)
     routes.post("", createAdministratorController)
-    routes.patch("/:id", updateAdministratorController)
-    routes.delete("/:id", deleteAdministratorController)
+    routes.patch("/:id", authToken, authAdm, updateAdministratorController)
+    routes.delete("/:id", authToken, authAdm, deleteAdministratorController)
 
     return routes
 }
