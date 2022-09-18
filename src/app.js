@@ -11,6 +11,7 @@ appRoutes(app)
 
 app.use((error, req, res) => {
     if (error instanceof AppError) {
+        console.log(error)
         return res.status(error.statusCode).json({
             status: "error",
             message: error.message
