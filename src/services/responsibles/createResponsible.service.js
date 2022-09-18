@@ -4,7 +4,7 @@ import { lowerCaseLetters,
     upperCaseLetters, 
     numbers, 
     symbols, 
-    passwordFunction } from "../../helpers/generatePassword"
+    passwordFunction } from "../../helpers/generatePassword.js"
 import { hash } from "bcrypt"
 
 const createResponsibleService = async (name, rg, phone, email) => {
