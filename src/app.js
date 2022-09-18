@@ -1,7 +1,7 @@
 import express, { response } from "express";
-import { AppError } from "./errors/AppError";
-import { startDatabase } from "./data-source";
-import appRoutes from "./routes";
+import { AppError } from "./errors/AppError.js";
+import { startDatabase } from "./data-source.mjs";
+import appRoutes from "./routes/index.js";
 
 const app = express();
 const port = 3000

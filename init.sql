@@ -1,17 +1,5 @@
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
-DROP TABLE administrator;
-DROP TABLE doctor;
-DROP TABLE responsible;
-DROP TABLE patient;
-DROP TABLE consultation;
-
-INSERT INTO 
-	administrator(email, phone, name, password)
-    VALUES
-    ('adm@adm.com', '01234567890123', 'nome', '123456');
-
-
 CREATE TABLE administrator(
     id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
     email VARCHAR(100) UNIQUE NOT NULL,
@@ -28,16 +16,16 @@ CREATE TABLE doctor(
     phone VARCHAR(14) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
     specialization VARCHAR(200) NOT NULL,
-    isAvailable BOOLEAN TRUE,
+    isAvailable BOOLEAN DEFAULT TRUE,
     password VARCHAR NOT NULL
 );
 
 CREATE TABLE responsible(
     id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
     name VARCHAR(200) NOT NULL,
-    rg VARCHAR(10) UNIQUE,
-    phone VARCHAR(14),
-    email VARCHAR(100) UNIQUE,
+    rg VARCHAR(10) NOT NULL UNIQUE,
+    phone VARCHAR(14) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
     password VARCHAR
 );
 

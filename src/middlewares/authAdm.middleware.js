@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken"
-import { database } from "../data-source"
-import { AppError } from "../errors/AppError"
+import { database } from "../data-source.mjs"
+import { AppError } from "../errors/AppError.js"
 
 const authAdm= (req, res, next) => {
     let token = req.headers.authorization

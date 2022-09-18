@@ -1,5 +1,5 @@
-import { database } from "../../data-source"
-import { AppError } from "../../errors/AppError"
+import { database } from "../../data-source.mjs"
+import { AppError } from "../../errors/AppError.js"
 import { patientQueries, doctorQueries, responsibleQueries, administratorQueries } from "./helpersQueries"
 import { compare } from "bcrypt"
 import jwt from "jsonwebtoken"

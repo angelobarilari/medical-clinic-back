@@ -1,5 +1,5 @@
-import { database } from "../../data-source"
-import { AppError } from "../../errors/AppError"
+import { database } from "../../data-source.mjs"
+import { AppError } from "../../errors/AppError.js"
 
 const updateAppointmentService = async (appointmentID, newAppointmentData) => {
     const { doctor_crm, patient_id, patient_rg, patient_name, date, hour } = newAppointmentData
