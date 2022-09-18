@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken"
 import { database } from "../data-source.js"
 import { AppError } from "../errors/AppError.js"
+import "dotenv/config"
 
 const authAdm= (req, res, next) => {
     let token = req.headers.authorization
@@ -11,7 +12,7 @@ const authAdm= (req, res, next) => {
 
     token = token.split(" ")[1]
 
-    jwt.verify(token, "SECRET_KEY", async (error, decoded) => {
+    jwt.verify(token, process.env.JWT_SECRET, async (error, decoded) => {
         if (error) return res.status(401).json({
                 message: "Invalid token"
             })
