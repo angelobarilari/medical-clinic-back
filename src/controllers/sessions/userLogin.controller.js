@@ -1,7 +1,6 @@
 import userLoginService from "../../services/sessions/userLogin.service.js";
 
 const userLoginController = async (req, res) => {
-    console.log("req")
     const { phone, email, password } = req.body
 
     try {
