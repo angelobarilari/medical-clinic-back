@@ -32,23 +32,28 @@ const userLoginService = async (phone, email, password) => {
         error: "error",
         message: "You must enter with password"
     })
-    
-    const patient = await database.query(patientQueries(phone, email), [])
-    if (patient.rowCount > 0) return tokenSettings(patient, password)
-    
-    const responsible = await database.query(responsibleQueries(phone, email), [])
-    if (responsible.rowCount > 0) return tokenSettings(responsible, password)
-    
-    const doctor = await database.query(doctorQueries(phone, email), [])
-    if (doctor.rowCount > 0) return tokenSettings(doctor, password)
-
-    const administrator = await database.query(administratorQueries(email), [])
-    if (administrator.rowCount > 0) return tokenSettings(administrator, password)
-
-    throw new AppError(404, {
-      error: "error",
-      message:"User not found"
-    })
+    try {
+      const patient = await database.query(patientQueries(phone, email), [])
+      if (patient.rowCount > 0) return tokenSettings(patient, password)
+      
+      const responsible = await database.query(responsibleQueries(phone, email), [])
+      if (responsible.rowCount > 0) return tokenSettings(responsible, password)
+      
+      const doctor = await database.query(doctorQueries(phone, email), [])
+      if (doctor.rowCount > 0) return tokenSettings(doctor, password)
+  
+      const administrator = await database.query(administratorQueries(email), [])
+      if (administrator.rowCount > 0) return tokenSettings(administrator, password)
+      
+      throw new AppError(404, {
+        error: "error",
+        message:"User not found"
+      })
+    } catch (error) {
+      throw new AppError(404, {
+        message
+      })
+    }
 }
 
 export default userLoginService
