@@ -33,7 +33,7 @@ CREATE TABLE patient(
     id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
     name VARCHAR(200) NOT NULL,
     rg VARCHAR(10) UNIQUE,
-    phone VARCHAR(14),
+    phone VARCHAR(14) UNIQUE,
     email VARCHAR(100) UNIQUE,
     password VARCHAR,
     responsible_id uuid,

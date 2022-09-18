@@ -3,20 +3,27 @@ import { AppError } from "../errors/AppError.js"
 import "dotenv/config"
 
 const authUser = (req, res, next) => {
-    let token = req.headers.authorization
+    try {
+        let token = req.headers.authorization
+    
+        if (!token) throw new AppError(400, "Missing authorization token")
 
-    if (!token) return new AppError(401, "Missing authorization token")
+        token = token.split(" ")[1]
 
-    token = token.split(" ")[1]
-
-    jwt.verify(token, process.env.JWT_SECRET, (error, decoded) => {
-        if (error) {
-            return res.status(401).json({
+        jwt.verify(token, process.env.JWT_SECRET, (error, decoded) => {
+            if (error) return res.status(401).json({
                 message: "Invalid token"
             })
-        }
-        next()
-    })
+
+            next()
+        })
+    } catch (error) {
+        return res.status(error.statusCode).json({
+            error: "error",
+            message: error.message
+        })
+    }
+
 }
 
 export default authUser

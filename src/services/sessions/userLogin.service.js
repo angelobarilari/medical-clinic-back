@@ -35,16 +35,15 @@ const userLoginService = async (phone, email, password) => {
     
     const patient = await database.query(patientQueries(phone, email), [])
     if (patient.rowCount > 0) return tokenSettings(patient, password)
-
+    
+    const responsible = await database.query(responsibleQueries(phone, email), [])
+    if (responsible.rowCount > 0) return tokenSettings(responsible, password)
+    
     const doctor = await database.query(doctorQueries(phone, email), [])
     if (doctor.rowCount > 0) return tokenSettings(doctor, password)
 
-    const responsible = await database.query(responsibleQueries(phone, email), [])
-    if (responsible.rowCount > 0) return tokenSettings(responsible, password)
-
     const administrator = await database.query(administratorQueries(email), [])
     if (administrator.rowCount > 0) return tokenSettings(administrator, password)
-
 }
 
 export default userLoginService
