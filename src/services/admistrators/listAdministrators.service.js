@@ -1,4 +1,4 @@
-import { database } from "../../data-source.mjs";
+import { database } from "../../data-source.js";
 
 const listAdministratorsService = async () => {
     const res = await database.query(
