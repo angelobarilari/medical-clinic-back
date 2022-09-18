@@ -2,7 +2,7 @@ import { Router } from "express";
 
 import createAppointmentController from "../controllers/appointment/createAppointment.controller.js";
 import deleteAppointmentController from "../controllers/appointment/deleteAppointment.controller.js";
-import listAppointmentByNameController from "../controllers/appointment/listappointmentByName.controller.js";
+import listAppointmentByNameController from "../controllers/appointment/listAppointmentByName.controller.js";
 import listAppointmentsController from "../controllers/appointment/listAppointments.controller.js";
 import updateAppointmentController from "../controllers/appointment/updateAppointment.controller.js";
 import authAdm from "../middlewares/authAdm.middleware.js";

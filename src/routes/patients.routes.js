@@ -11,8 +11,8 @@ import authUser from "../middlewares/authToken.middleware.js"
 const routes = Router()
 
 export const patientRoutes = () => {
-    routes.get("", authUser, listAPatientController)
-    routes.get("/all", authUser, authAdm, listPatientsController)
+    routes.get("", authUser, authAdm, listAPatientController)
+    routes.get("/all", authAdm, listPatientsController)
     routes.post("", authUser, authAdm, createPatientController)
     routes.patch("", authUser, authAdm, updatePatientcontroller)
     routes.delete("/:rg", authUser, authAdm, deletePatientController)

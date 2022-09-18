@@ -47,31 +47,20 @@ export const doctorQueries = (phone, email) => {
 }
 
 export const responsibleQueries = (phone, email) => {
-    //if (email && phone) {
-    //    const responsibleQuery = `SELECT 
-    //                                * 
-    //                              FROM 
-    //                                responsible 
-    //                              WHERE 
-    //                                responsible.email = '${email}' 
-    //                              OR 
-    //                                responsible.phone = '${phone}'`
-    //
-    //    return responsibleQuery
-    //}
-
+  console.log("entrou na func")
     if (email && !phone) {
+      console.log("query errada")
         const responsibleQuery = `SELECT 
                                     * 
                                   FROM 
                                     responsible 
                                   WHERE 
                                     responsible.email = '${email}'`
-
         return responsibleQuery
     }
-
+    console.log("chegou na verify de phone existir")
     if (!email && phone) {
+      console.log("query certa")
         const responsibleQuery = `SELECT 
                                     * 
                                   FROM 
@@ -81,6 +70,8 @@ export const responsibleQueries = (phone, email) => {
 
         return responsibleQuery
     }
+
+    console.log("passou e n entrou")
 }
 
 export const administratorQueries = (email) => {
