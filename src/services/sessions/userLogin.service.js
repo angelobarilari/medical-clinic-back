@@ -44,6 +44,11 @@ const userLoginService = async (phone, email, password) => {
 
     const administrator = await database.query(administratorQueries(email), [])
     if (administrator.rowCount > 0) return tokenSettings(administrator, password)
+
+    throw new AppError(404, {
+      error: "error",
+      message:"User not found"
+    })
 }
 
 export default userLoginService
