@@ -11,6 +11,7 @@ appRoutes(app)
 
 app.use((error, req, res) => {
     if (error instanceof AppError) {
+        console.log(error)
         return res.status(error.statusCode).json({
             status: "error",
             message: error.message
@@ -27,6 +28,5 @@ app.listen(process.env.PORT || 3000, () => {
     console.log(`Server is running in port ${port}`)
     startDatabase();
 });
-
 
 export default app
