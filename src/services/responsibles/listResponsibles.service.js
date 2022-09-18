@@ -1,4 +1,4 @@
-import { database } from "../../data-source"
+import { database } from "../../data-source.mjs"
 
 const listResponsiblesService = async () => {
     const res = await database.query(

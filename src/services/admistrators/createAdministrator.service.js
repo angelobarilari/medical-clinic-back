@@ -1,5 +1,5 @@
-import { database } from "../../data-source";
-import { AppError } from "../../errors/AppError";
+import { database } from "../../data-source.mjs";
+import { AppError } from "../../errors/AppError.js";
 import { hash } from "bcrypt";
 import { v4 as uuidv4 } from "uuid";
 
@@ -20,7 +20,6 @@ const createAdministratorService = async (email, phone, name, password) => {
     const userID = uuidv4()
 
     try {
-
         const res = await database.query(
             `INSERT INTO
                 administrator

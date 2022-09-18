@@ -20,8 +20,8 @@
     "express-async-errors": "^3.1.1",
     "jest": "^28.0.2",
     "jsonwebtoken": "^8.5.1",
-
     "pg": "^8.7.3",
+    "typeorm": "^0.3.9",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
