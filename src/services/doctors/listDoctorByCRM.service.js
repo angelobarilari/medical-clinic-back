@@ -1,5 +1,5 @@
-import { database } from "../../data-source"
-import { AppError } from "../../errors/AppError"
+import { database } from "../../data-source.mjs"
+import { AppError } from "../../errors/AppError.js"
 
 const listDoctorByCRMService = async (crm) => {
     if (!crm)throw new AppError(400, {
