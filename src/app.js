@@ -18,9 +18,9 @@ app.use((error, req, res) => {
         })
     }
 
-    return response.status(500).json({
+    return response.status(300).json({
         status: "error",
-        message: "Internal server error"
+        message: "Erro no servidor"
     })
 })
 
