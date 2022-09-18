@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken"
-import { database } from "../data-source.mjs"
+import { database } from "../data-source.js"
 import { AppError } from "../errors/AppError.js"
 
 const authAdm= (req, res, next) => {
