@@ -1,9 +1,9 @@
-import { adminsitratorRoutes } from "./administrators.routes"
-import { appointmentRoutes } from "./appointments.routes"
-import { doctorRoutes } from "./doctors.routes"
-import { patientRoutes } from "./patients.routes"
-import { responsibleRoutes } from "./responsibles.routes"
-import { sessionRoutes } from "./sessions.routes"
+import { adminsitratorRoutes } from "./administrators.routes.js"
+import { appointmentRoutes } from "./appointments.routes.js"
+import { doctorRoutes } from "./doctors.routes.js"
+import { patientRoutes } from "./patients.routes.js"
+import { responsibleRoutes } from "./responsibles.routes.js"
+import { sessionRoutes } from "./sessions.routes.js"
 
 const appRoutes = (app) => {
     app.use("/doctors", doctorRoutes())

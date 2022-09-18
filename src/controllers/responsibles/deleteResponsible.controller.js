@@ -1,4 +1,4 @@
-import deleteResponsibleService from "../../services/responsibles/deletePatient.service"
+import deleteResponsibleService from "../../services/responsibles/deletePatient.service.js"
 
 const deleteResponsibleController = async (req, res) => {
     const { name } = req.body

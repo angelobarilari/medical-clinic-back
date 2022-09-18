@@ -1,12 +1,12 @@
 import { Router } from "express"
 
-import createPatientController from "../controllers/patients/createPatient.controller"
-import deletePatientController from "../controllers/patients/deletePatient.controller"
-import listAPatientController from "../controllers/patients/listAPatient.controller"
-import listPatientsController from "../controllers/patients/listPatients.controller"
-import updatePatientcontroller from "../controllers/patients/updatePatient.controller"
-import authAdm from "../middlewares/authAdm.middleware"
-import authUser from "../middlewares/authToken.middleware"
+import createPatientController from "../controllers/patients/createPatient.controller.js"
+import deletePatientController from "../controllers/patients/deletePatient.controller.js"
+import listAPatientController from "../controllers/patients/listAPatient.controller.js"
+import listPatientsController from "../controllers/patients/listPatients.controller.js"
+import updatePatientcontroller from "../controllers/patients/updatePatient.controller.js"
+import authAdm from "../middlewares/authAdm.middleware.js"
+import authUser from "../middlewares/authToken.middleware.js"
 
 const routes = Router()
 

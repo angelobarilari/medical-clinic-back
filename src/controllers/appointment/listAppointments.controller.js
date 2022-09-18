@@ -1,4 +1,4 @@
-import listAppointmentsService from "../../services/appointments/listAppointments.service"
+import listAppointmentsService from "../../services/appointments/listAppointments.service.js"
 
 const listAppointmentsController = async (req, res) => {
     const appointments = await listAppointmentsService()

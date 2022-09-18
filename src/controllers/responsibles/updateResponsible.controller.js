@@ -1,4 +1,4 @@
-import updateResponsibleService from "../../services/responsibles/updateResponsible.service";
+import updateResponsibleService from "../../services/responsibles/updateResponsible.service.js";
 
 const updateResponsibleController = async (req, res) => {
     const newResponsibleData = req.body

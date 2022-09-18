@@ -1,4 +1,4 @@
-import listAppointmentByNameService from "../../services/appointments/listAppointmentByName.service"
+import listAppointmentByNameService from "../../services/appointments/listAppointmentByName.service.js"
 
 const listAppointmentByNameController = async (req, res) => {
     const { name } = req.body

@@ -1,4 +1,4 @@
-import createDoctorService from "../../services/doctors/createDoctor.service"
+import createDoctorService from "../../services/doctors/createDoctor.service.js"
 
 const createDoctorController = async (req, res) => {
     const { name, crm, phone, email, specialization, password } = req.body

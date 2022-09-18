@@ -1,6 +1,6 @@
 import { database } from "../../data-source.js"
 import { AppError } from "../../errors/AppError.js"
-import { patientQueries, doctorQueries, responsibleQueries, administratorQueries } from "./helpersQueries"
+import { patientQueries, doctorQueries, responsibleQueries, administratorQueries } from "./helpersQueries.js"
 import { compare } from "bcrypt"
 import jwt from "jsonwebtoken"
 import "dotenv/config"

@@ -1,4 +1,4 @@
-import listAPatientService from "../../services/patients/listAPatient.service"
+import listAPatientService from "../../services/patients/listAPatient.service.js"
 
 const listAPatientController = async (req, res) => {
     const { name } = req.body

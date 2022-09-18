@@ -1,4 +1,4 @@
-import deletePatientService from "../../services/patients/deletePatient.service";
+import deletePatientService from "../../services/patients/deletePatient.service.js";
 
 const deletePatientController = async (req, res) => {
     const { rg } = req.params

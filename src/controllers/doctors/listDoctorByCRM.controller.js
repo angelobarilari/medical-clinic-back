@@ -1,4 +1,4 @@
-import listDoctorByCRMService from "../../services/doctors/listDoctorByCRM.service"
+import listDoctorByCRMService from "../../services/doctors/listDoctorByCRM.service.js"
 
 const listDoctorByCRMController = async (req, res) => {
     const { crm } = req.params

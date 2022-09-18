@@ -1,4 +1,4 @@
-import createAdministratorService from "../../services/admistrators/createAdministrator.service"
+import createAdministratorService from "../../services/admistrators/createAdministrator.service.js"
 
 const createAdministratorController = async (req, res) => {
     const { email, phone, name, password } = req.body
