@@ -47,9 +47,7 @@ export const doctorQueries = (phone, email) => {
 }
 
 export const responsibleQueries = (phone, email) => {
-  console.log("entrou na func")
     if (email && !phone) {
-      console.log("query errada")
         const responsibleQuery = `SELECT 
                                     * 
                                   FROM 
@@ -58,7 +56,6 @@ export const responsibleQueries = (phone, email) => {
                                     responsible.email = '${email}'`
         return responsibleQuery
     }
-    console.log("chegou na verify de phone existir")
     if (!email && phone) {
       console.log("query certa")
         const responsibleQuery = `SELECT 
@@ -70,8 +67,6 @@ export const responsibleQueries = (phone, email) => {
 
         return responsibleQuery
     }
-
-    console.log("passou e n entrou")
 }
 
 export const administratorQueries = (email) => {

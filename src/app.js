@@ -12,15 +12,15 @@ appRoutes(app)
 app.use((error, req, res) => {
     if (error instanceof AppError) {
         console.log(error)
-        return res.status(error.statusCode).json({
+        return res.status(301).json({
             status: "error",
-            message: error.message
+            message: "erro com a instance"
         })
     }
 
-    return response.status(500).json({
+    return response.status(300).json({
         status: "error",
-        message: "Internal server error"
+        message: "Erro no servidor"
     })
 })
 
